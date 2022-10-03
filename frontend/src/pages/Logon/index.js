@@ -7,11 +7,14 @@ import {Link, useNavigate} from 'react-router-dom';
 import logoImg from '../../assets/logo.svg';
 import heroesImg from '../../assets/heroes.png';
 import {FiLogIn} from 'react-icons/fi';
+import Modal from '../../components/Modal';
 
 export default function Logon() {
     const navigate = useNavigate();
+    
 
     const [id, setID] = useState('');
+    const [modal, setModal] = useState(false);
 
     async function handleLogin(e){
         e.preventDefault();
@@ -25,13 +28,15 @@ export default function Logon() {
             navigate('/profile');
 
         } catch (err) {
-            alert('Falha no login, tente novamente.');
+            setModal(true);
         }
 
     }
 
     return (
         <div className="logon-container">
+            { modal && <Modal modal={setModal} title = "Falha no login, tente novamente."/>
+            } 
             <section className="form">
                 <img src={logoImg} alt="Be The Hero" />
 

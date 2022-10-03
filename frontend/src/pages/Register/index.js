@@ -3,20 +3,23 @@ import { useState } from 'react';
 import './styles.css';
 import api from '../../services/api';
 
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 import logoImg from '../../assets/logo.svg';
-import {FiArrowLeft} from 'react-icons/fi'
+import {FiArrowLeft} from 'react-icons/fi';
+import Modal from '../../components/Modal';
 
 export default function Register(){
-
-    const navigate = useNavigate();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [whatsapp, setWhatsapp] = useState('');
     const [city, setCity] = useState('');
     const [uf, setUF] = useState('');
+    
+    const [modal, setModal] = useState(false);
+    const [confirm, setConfirm] = useState(false);
+    const [ongID, setOngID] = useState('');
 
     async function handleRegister(e){
         e.preventDefault();
@@ -31,18 +34,20 @@ export default function Register(){
         
         try {
             const response = await api.post('ongs', data);
-            
-            alert(`Seu ID de acesso: ${response.data.id}`);
-
-            navigate('/');
+            setOngID(response.data.id);
+            setConfirm(true);
 
         } catch (err) {
-            alert(`Erro no cadastro, tente novamente`);
+            setModal(true);
         }
     }
 
     return (
         <div className="register-container">
+            { modal && <Modal modal={setModal} title = "Erro no cadastro, tente novamente." type="error"/>
+            }
+            { confirm && <Modal modal={setConfirm} title ={"Seu ID de acesso: "} ongID={ongID} type="confirm"/>
+            }
             <div className="content">
                 <section>
                     <img src={logoImg} alt="Be The Hero" />

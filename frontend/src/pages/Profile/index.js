@@ -6,10 +6,12 @@ import {Link, useNavigate} from 'react-router-dom';
 
 import logoImg from '../../assets/logo.svg';
 import {FiPower, FiTrash2} from 'react-icons/fi';
+import Modal from '../../components/Modal';
 
 export default function Profile(){
 
     const [incidents, setIncidents] = useState([]);
+    const [modal, setModal] = useState(false);
     
     const navigate = useNavigate();
     
@@ -37,7 +39,7 @@ export default function Profile(){
             setIncidents(incidents.filter(incident => incident.id !== id));
             
         } catch (err) {
-            alert('Error ao deletar caso, tente novamente');
+            setModal(true);
         }
     }
 
@@ -48,6 +50,8 @@ export default function Profile(){
 
     return(
         <div className="profile-container">
+            { modal && <Modal modal={setModal} title = "Error ao deletar caso, tente novamente."/>
+            } 
             <header>
                 <img src={logoImg} alt="Be The Hero" />
                 <span>Bem vindo, {ongName}</span>

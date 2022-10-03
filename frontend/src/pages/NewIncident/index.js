@@ -5,7 +5,8 @@ import './styles.css';
 import {Link, useNavigate} from 'react-router-dom';
 
 import logoImg from '../../assets/logo.svg';
-import {FiArrowLeft} from 'react-icons/fi'
+import {FiArrowLeft} from 'react-icons/fi';
+import Modal from '../../components/Modal';
 
 export default function NewIndicent(){
     const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function NewIndicent(){
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [value, setValue] = useState('');
+    const [modal, setModal] = useState(false);
 
     async function handleNewIncident(e){
         e.preventDefault();
@@ -35,12 +37,14 @@ export default function NewIndicent(){
             navigate('/profile');
             
         } catch (err) {
-            alert('Error ao cadastrar caso, tente novamente.');
+            setModal(true);
         }
     }
 
     return (
         <div className="new-indicent-container">
+            { modal && <Modal modal={setModal} title = "Error ao cadastrar caso, tente novamente."/>
+            } 
             <div className="content">
                 <section>
                     <img src={logoImg} alt="Be The Hero" />

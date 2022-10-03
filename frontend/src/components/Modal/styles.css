@@ -1,0 +1,40 @@
+.poup{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:rgba(0, 0, 0, 0.397);
+}
+
+
+.poup .poup-body {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+   
+    background-color: snow;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: center;
+}
+
+.poup .poup-body p{
+    font-size: 20px;
+}
+
+.poup .poup-body button{
+    width: 40%;
+    height: 40px;
+    background: #e02041;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 700;
+}
